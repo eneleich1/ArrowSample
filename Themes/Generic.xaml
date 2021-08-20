@@ -1,0 +1,58 @@
+<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="clr-namespace:ArrowSample"
+    xmlns:sys="clr-namespace:System;assembly=mscorlib"
+    x:Class="ArrowSample.Themes.Generic"
+    >
+    <Style TargetType="{x:Type local:Arrow}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type local:Arrow}">
+                    <ControlTemplate.Resources>
+                        <local:MyConverter x:Key="converter"/>
+                        <sys:Int32 x:Key="val">-2</sys:Int32>
+                        <sys:Double x:Key="size">4</sys:Double>
+                    </ControlTemplate.Resources>
+                    <Canvas>
+                        <Line
+                            X1="{TemplateBinding From_X}" Y1="{TemplateBinding From_Y}"
+                             X2="{TemplateBinding To_X}" Y2="{TemplateBinding To_Y}"
+                            StrokeThickness="{TemplateBinding Thickness}"
+                            Stroke="{TemplateBinding Stroke}"
+                            >
+                        </Line>
+                        <Line
+                            X1="{TemplateBinding P1_X}" Y1="{TemplateBinding P1_Y}"
+                             X2="{TemplateBinding To_X}" Y2="{TemplateBinding To_Y}"
+                            StrokeThickness="{TemplateBinding Thickness}"
+                             Stroke="{TemplateBinding Stroke}"
+                            >
+                        </Line>
+                        <Line
+                            X1="{TemplateBinding P2_X}" Y1="{TemplateBinding P2_Y}"
+                             X2="{TemplateBinding To_X}" Y2="{TemplateBinding To_Y}"
+                            StrokeThickness="{TemplateBinding Thickness}"
+                             Stroke="{TemplateBinding Stroke}"
+                            >
+                        </Line>
+                        <Rectangle x:Name="from_Rect"
+                            Canvas.Left="{TemplateBinding From_X, Converter={StaticResource converter}, ConverterParameter={StaticResource val}}"
+                            Canvas.Top="{TemplateBinding From_Y, Converter={StaticResource converter}, ConverterParameter={StaticResource val}}"
+                            Fill="White"
+                            Width="{StaticResource size}" Height="{StaticResource size}"
+                             MouseLeftButtonDown="from_Rect_MouseDown" MouseEnter="MouseEnter" MouseLeave="MouseLeave"
+                            />
+                        <Rectangle x:Name="to_Rect"
+                            Canvas.Left="{TemplateBinding To_X, Converter={StaticResource converter}, ConverterParameter={StaticResource val}}" 
+                            Canvas.Top="{TemplateBinding To_Y, Converter={StaticResource converter}, ConverterParameter={StaticResource val}}"
+                            Fill="White"
+                            Width="{StaticResource size}" Height="{StaticResource size}"
+                            MouseLeftButtonDown="to_Rect_MouseDown" MouseEnter="MouseEnter" MouseLeave="MouseLeave"
+                            />
+                    </Canvas>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>
